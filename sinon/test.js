@@ -7,9 +7,9 @@ chai.should();
 describe("TodoService :", () => {
     let todoService, result = null, todoRepositoryMock, todoRepository;
     describe("#findAll", () => {
-        before(() => {
+        beforeEach(() => {
             todoRepository = {
-                findAll: function () {
+                findAll: function (id) {
 
                 }
             };
@@ -19,7 +19,6 @@ describe("TodoService :", () => {
 
 
         it("should return todo list", () => {
-
             todoRepositoryMock.expects('findAll').returns([{id: 1, title: "A"}, {id: 2, title: "B"}]);
 
             result = todoService.findAll();
@@ -29,7 +28,7 @@ describe("TodoService :", () => {
             result[1].title.should.equal("B");
         });
 
-        after(()=> {
+        afterEach(()=> {
             todoRepositoryMock.verify();
         });
     });
